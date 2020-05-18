@@ -14,12 +14,17 @@ namespace MemoryGame
     {
 
         Random rand = new Random();
+        List<string> icons = new List<string>()
+        { "e", "e", "d", "d", "k", "k", "b", "b",
+          "N", "N", "!", "!", "&", "&", "$", "$"        
+        };
 
         public Form1()
         {
             InitializeComponent();
             InitializeGrid();
             AddGridLables();
+            PutRandomIcons();
         }
 
         private void InitializeGrid()
@@ -45,9 +50,7 @@ namespace MemoryGame
                         ForeColor = Color.Black,
                         AutoSize = false,
                         TextAlign = ContentAlignment.MiddleCenter,
-                        Font = new Font("Webdings", 72, FontStyle.Bold),
-                        Text = "e"
-
+                        Font = new Font("Webdings", 72, FontStyle.Bold)                        
                     };
                     Grid.Controls.Add(label, c, r);
                 }
@@ -56,7 +59,13 @@ namespace MemoryGame
 
         private void PutRandomIcons()
         {
-
+            Label label;
+            for(int i = 0; i < 16; i++)
+            {
+                int randomIndex = rand.Next(0, 16);
+                label = (Label)Grid.Controls[i];
+                label.Text = icons[randomIndex];
+            }
         }
 
     }
