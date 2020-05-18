@@ -12,6 +12,9 @@ namespace MemoryGame
 {
     public partial class Form1 : Form
     {
+
+        Random rand = new Random();
+
         public Form1()
         {
             InitializeComponent();
@@ -49,6 +52,11 @@ namespace MemoryGame
                     Grid.Controls.Add(label, c, r);
                 }
             }
+        }
+
+        private void PutRandomIcons()
+        {
+
         }
 
     }
