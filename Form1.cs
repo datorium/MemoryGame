@@ -84,6 +84,11 @@ namespace MemoryGame
 
         private void Label_Click(object sender, EventArgs e)
         {
+            if(labelOne != null && labelTwo != null)
+            {
+                return;
+            }
+            
             Label label = (Label)sender;
             label.ForeColor = Color.Black;
             if(labelOne == null)
@@ -128,11 +133,7 @@ namespace MemoryGame
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.R)
-            {
-                InitializeIconsList();
-                //PutRandomIcons();
-            }
+
         }
     }
 }
