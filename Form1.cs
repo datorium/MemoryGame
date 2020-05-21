@@ -17,6 +17,7 @@ namespace MemoryGame
         List<string> icons = null;
         Label labelOne = null;
         Label labelTwo = null;
+        Timer timer = null;
 
         public Form1()
         {
@@ -25,6 +26,23 @@ namespace MemoryGame
             InitializeGrid();
             AddGridLables();
             PutRandomIcons();
+            InitializeTimer();
+        }
+
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Interval = 500;
+            timer.Tick += new EventHandler(Timer_Tick);
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            labelOne.ForeColor = Color.LightSteelBlue;
+            labelTwo.ForeColor = Color.LightSteelBlue;
+            labelOne = null;
+            labelTwo = null;
+            timer.Stop();
         }
 
         private void InitializeIconsList()
@@ -76,6 +94,11 @@ namespace MemoryGame
             else
             {
                 labelTwo = label;
+                if(labelTwo == labelOne)
+                {                    
+                    return;
+                }
+
                 if(labelTwo.Text == labelOne.Text)
                 {
                     labelOne = null;
@@ -84,10 +107,7 @@ namespace MemoryGame
                 }
                 else
                 {
-                    labelOne.ForeColor = Color.LightSteelBlue;
-                    labelTwo.ForeColor = Color.LightSteelBlue;
-                    labelOne = null;
-                    labelTwo = null;
+                    timer.Start();
                     return;
                 }
             }
@@ -111,7 +131,7 @@ namespace MemoryGame
             if(e.KeyCode == Keys.R)
             {
                 InitializeIconsList();
-                PutRandomIcons();
+                //PutRandomIcons();
             }
         }
     }
