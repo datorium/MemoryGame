@@ -12,17 +12,25 @@ namespace MemoryGame
 {
     public partial class Form1 : Form
     {
+        List<string> icons = new List<string>
+        {
+            "e", "e", "b", "b", "d", "d", "k", "k",
+            "v", "v", "!", "!", "$", "$", "&", "&"
+        };
+        Random rand = new Random();
+
         public Form1()
         {
             InitializeComponent();
             InitializeGrid();
             FillTheGrid();
+            GenerateIcons();
         }
 
         private void InitializeGrid()
         {
-            this.Width = 400;
-            this.Height = 400;
+            this.Width = 600;
+            this.Height = 600;
             Grid.BackColor = Color.LightSteelBlue;
             Grid.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
         }
@@ -38,15 +46,25 @@ namespace MemoryGame
                     label = new Label
                     {
                         Dock = DockStyle.Fill,
-                        ForeColor = Color.White,
+                        ForeColor = Color.Gray,
                         TextAlign = ContentAlignment.MiddleCenter,
                         AutoSize = false,
-                        Font = new Font("Roboto", 72)
+                        Font = new Font("Webdings", 72)
                     };
 
                     Grid.Controls.Add(label, c, r);
                 }
             }            
+        }
+
+        private void GenerateIcons()
+        {
+            Label label;
+            for(int i = 0; i < 16; i++)
+            {
+                label = (Label)Grid.Controls[i];
+                label.Text = icons[rand.Next(0, 16)];
+            }
         }
     }
 }
