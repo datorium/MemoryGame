@@ -14,17 +14,23 @@ namespace MemoryGame
     {
 
         Random rand = new Random();
-        List<string> icons = new List<string>()
-        { "e", "e", "d", "d", "k", "k", "b", "b",
-          "v", "v", "!", "!", "N", "N", "$", "$"        
-        };
+        List<string> icons = null;
 
         public Form1()
         {
             InitializeComponent();
+            InitializeIconsList();
             InitializeGrid();
             AddGridLables();
             PutRandomIcons();
+        }
+
+        private void InitializeIconsList()
+        {
+            icons = new List<string>()
+            { "e", "e", "d", "d", "k", "k", "b", "b",
+              "v", "v", "!", "!", "N", "N", "$", "$"
+            };
         }
 
         private void InitializeGrid()
@@ -67,5 +73,13 @@ namespace MemoryGame
             }
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.R)
+            {
+                InitializeIconsList();
+                PutRandomIcons();
+            }
+        }
     }
 }
