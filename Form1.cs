@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -57,7 +58,6 @@ namespace MemoryGame
         private void FillTheGrid()
         {
             Label label;
-
             for(int c = 0; c < 4; c++)
             {
                 for(int r = 0; r < 4; r++)
@@ -80,8 +80,13 @@ namespace MemoryGame
         private void Label_Click(object sender, EventArgs e)
         {
             Label label = (Label)sender;
+            
+            if(labelOne != null && labelTwo != null)
+            {
+                return;
+            }
 
-            if(labelOne == null)
+            if (labelOne == null)
             {
                 labelOne = label;
                 label.ForeColor = Color.Black;
@@ -90,9 +95,17 @@ namespace MemoryGame
             else
             {
                 labelTwo = label;
+                
+                if(labelTwo == labelOne)
+                {
+                    return;
+                }                
+                
                 label.ForeColor = Color.Black;
-                if (labelOne == labelTwo)
-                {                    
+                if (labelOne.Text == labelTwo.Text)
+                {
+                    labelOne = null;
+                    labelTwo = null;
                     return;
                 }
                 else
