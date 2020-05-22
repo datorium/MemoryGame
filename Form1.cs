@@ -100,11 +100,6 @@ namespace MemoryGame
                     mainTimer.Start();
                 }
             }
-            
-
-
-
-            
         }
 
         private void GenerateIcons()
