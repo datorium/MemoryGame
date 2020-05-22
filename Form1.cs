@@ -19,6 +19,7 @@ namespace MemoryGame
         };
         Random rand = new Random();
         Label labelOne = null, labelTwo = null;
+        Timer mainTimer = null;
 
         public Form1()
         {
@@ -26,6 +27,23 @@ namespace MemoryGame
             InitializeGrid();
             FillTheGrid();
             GenerateIcons();
+            InitializeTimer();
+        }
+
+        private void InitializeTimer()
+        {
+            mainTimer = new Timer();
+            mainTimer.Interval = 500;
+            mainTimer.Tick += new EventHandler(MainTimer_Tick);
+        }
+
+        private void MainTimer_Tick(object sender, EventArgs e)
+        {
+            labelOne.ForeColor = Color.LightSteelBlue;
+            labelTwo.ForeColor = Color.LightSteelBlue;
+            labelOne = null;
+            labelTwo = null;
+            mainTimer.Stop();
         }
 
         private void InitializeGrid()
@@ -79,10 +97,7 @@ namespace MemoryGame
                 }
                 else
                 {
-                    labelOne.ForeColor = Color.LightSteelBlue;
-                    labelTwo.ForeColor = Color.LightSteelBlue;
-                    labelOne = null;
-                    labelTwo = null;
+                    mainTimer.Start();
                 }
             }
             
