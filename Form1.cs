@@ -15,7 +15,7 @@ namespace MemoryGame
         List<string> icons = new List<string>
         {
             "e", "e", "b", "b", "d", "d", "k", "k",
-            "v", "v", "!", "!", "$", "$", "&", "&"
+            "v", "v", "!", "!", "$", "$", "N", "N"
         };
         Random rand = new Random();
 
@@ -59,11 +59,15 @@ namespace MemoryGame
 
         private void GenerateIcons()
         {
+            int randomIndex;
             Label label;
+
             for(int i = 0; i < 16; i++)
             {
+                randomIndex = rand.Next(0, icons.Count);
                 label = (Label)Grid.Controls[i];
-                label.Text = icons[rand.Next(0, 16)];
+                label.Text = icons[randomIndex];
+                icons.RemoveAt(randomIndex);
             }
         }
     }
