@@ -18,6 +18,7 @@ namespace MemoryGame
             "v", "v", "!", "!", "$", "$", "N", "N"
         };
         Random rand = new Random();
+        Label labelOne = null, labelTwo = null;
 
         public Form1()
         {
@@ -46,15 +47,49 @@ namespace MemoryGame
                     label = new Label
                     {
                         Dock = DockStyle.Fill,
-                        ForeColor = Color.Gray,
+                        ForeColor = Color.LightSteelBlue,
                         TextAlign = ContentAlignment.MiddleCenter,
                         AutoSize = false,
                         Font = new Font("Webdings", 72)
                     };
+                    label.Click += new EventHandler(Label_Click);
 
                     Grid.Controls.Add(label, c, r);
                 }
             }            
+        }
+
+        private void Label_Click(object sender, EventArgs e)
+        {
+            Label label = (Label)sender;
+
+            if(labelOne == null)
+            {
+                labelOne = label;
+                label.ForeColor = Color.Black;
+                return;
+            }
+            else
+            {
+                labelTwo = label;
+                label.ForeColor = Color.Black;
+                if (labelOne == labelTwo)
+                {                    
+                    return;
+                }
+                else
+                {
+                    labelOne.ForeColor = Color.LightSteelBlue;
+                    labelTwo.ForeColor = Color.LightSteelBlue;
+                    labelOne = null;
+                    labelTwo = null;
+                }
+            }
+            
+
+
+
+            
         }
 
         private void GenerateIcons()
